@@ -51,7 +51,7 @@ flowchart TD
 
 ## 🚀 Current Status (Completed Milestones)
 
-The first two core phases of the system are implemented and verified live:
+The first three core phases of the system are implemented and verified live:
 
 * [x] **Infrastructure (Docker Compose):** Containerized ZooKeeper-less **Kafka (KRaft Mode)**, **Redis 7 (Alpine)**, and **PostgreSQL 16 (Alpine)**.
 * [x] **Domain Layer:** Defined standard CDR models with strict telecom business rule validation (`Validate()`).
@@ -59,12 +59,12 @@ The first two core phases of the system are implemented and verified live:
 * [x] **Ingestion HTTP Gateway:** Asynchronous ingestion endpoint powered by `go-chi/chi/v5` returning `HTTP 202 Accepted`.
 * [x] **Graceful Shutdown:** Production-ready lifecycle management handling `SIGINT` and `SIGTERM` with bounded context timeouts.
 * [x] **Partitioning & Topologies:** Topic `cdr-events` configured with 3 partitions for horizontal consumer scalability.
+* [x] **Distributed Rate Limiter (Phase 3):** Redis Sorted Set (ZSET) atomic Sliding Window Log engine via embedded Lua scripts, enforced via Chi HTTP Middleware returning `HTTP 429 Too Many Requests`.
 
 ---
 
 ## 🛠️ Roadmap (Upcoming Phases)
 
-* [ ] **Phase 3 (Distributed Rate Limiter):** Redis Sorted Set (ZSET) atomic **Sliding Window Log** middleware using embedded Lua scripts.
 * [ ] **Phase 4 (Quota Engine & Worker Pool):** Fixed-size Goroutine Worker Pool with backpressure controls and Redis atomic `DECRBY` balance updates.
 * [ ] **Phase 5 (PostgreSQL Micro-Batching):** Write-behind caching buffer flushing via `time.Ticker` using high-speed binary `pgx.CopyFrom`.
 * [ ] **Phase 6 (Observability & Load Testing):** Prometheus metrics instrumentation, Grafana visualization, and 2,000+ RPS stress testing via `k6`.
