@@ -1,0 +1,53 @@
+# Go Derleme Çıktıları ve Binary'ler
+bin/
+dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test ve Coverage Dosyaları
+*.test
+*.out
+coverage.html
+coverage.txt
+
+# Bağımlılıklar (Go modülleri kullanıldığı için vendor gerekmez)
+vendor/
+
+# Ortam Değişkenleri ve Gizli Bilgiler
+.env
+.env.*
+!.env.example
+
+# Notlar
+notlar/
+
+# Log Dosyaları
+*.log
+logs/
+
+# Editör ve IDE Yapılandırmaları
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# İşletim Sistemi Kalıntıları
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Geçici Dosyalar ve Local Docker Verileri
+tmp/
+data/
+docker-data/
