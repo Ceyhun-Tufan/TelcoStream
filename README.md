@@ -22,14 +22,14 @@ flowchart TD
         RateLimiter -->|Allowed| KafkaProd["Kafka Producer (Hash Balancer)"]
     end
 
-    KafkaProd -->|Topic: cdr-events (3 Partitions)| KafkaBrokers["Apache Kafka (KRaft Broker)"]
+    KafkaProd -->|Topic: cdr-events - 3 Partitions| KafkaBrokers["Apache Kafka (KRaft Broker)"]
 
     subgraph QuotaEngine ["Quota Engine & Stream Processor"]
         KafkaBrokers --> ConsumerGroup["Kafka Consumer Group"]
         ConsumerGroup --> WorkerPool["Go Worker Pool (Goroutines & Channels)"]
         
         WorkerPool --> RedisQuota["Redis (Atomic DECRBY / Quota)"]
-        RedisQuota -->|Quota Exhausted?| AlertKafka["Kafka Topic: quota-alerts"]
+        RedisQuota -->|Quota Exhausted| AlertKafka["Kafka Topic: quota-alerts"]
         
         WorkerPool --> BatchBuffer["In-Memory Buffer (Micro-Batching)"]
         BatchBuffer -->|Every 5s or 1,000 records| Postgres["PostgreSQL 16 (pgx.CopyFrom)"]
